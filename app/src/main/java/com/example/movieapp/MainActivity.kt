@@ -48,12 +48,12 @@ class MainActivity : AppCompatActivity() {
         }
         moviesRecyclerView?.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         shortlistMoviesRecyclerView?.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        mViewModel.movies.observe(this,{
-            if(mAdapter == null){
-                mAdapter = HomepageAdapter(object: shortlistClickListener{
+        mViewModel.movies.observe(this) {
+            if (mAdapter == null) {
+                mAdapter = HomepageAdapter(object : shortlistClickListener {
                     override fun onShortlistClick(movie: Movie.Movie) {
 
-                        mViewModel.storeShortlistedMovie(this@MainActivity,movie)
+                        mViewModel.storeShortlistedMovie(this@MainActivity, movie)
                     }
 
                 })
@@ -61,23 +61,23 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            mAdapter!!.submitList(it.first.movies as MutableList<Movie.Movie>,it.second)
-        })
-        mViewModel.shortlistedMovies.observe(this,{
-            if(mShortlistAdapter == null){
-                mShortlistAdapter = MoviesAdapter(object : shortlistClickListener{
+            mAdapter!!.submitList(it.first.movies as MutableList<Movie.Movie>, it.second)
+        }
+        mViewModel.shortlistedMovies.observe(this) {
+            if (mShortlistAdapter == null) {
+                mShortlistAdapter = MoviesAdapter(object : shortlistClickListener {
                     override fun onShortlistClick(movie: Movie.Movie) {
 
                     }
 
-                },true)
+                }, true)
                 shortlistMoviesRecyclerView?.adapter = mShortlistAdapter
             }
 
             val list: MutableList<Movie.Movie>? = mShortlistAdapter?.MovieList
             list?.add(it)
             mShortlistAdapter?.submitList(list!!)
-        })
+        }
         mViewModel.getMovies()
         val shortlistedMovies = mViewModel.getShortlistedMovies(this)
         if(mShortlistAdapter == null){

@@ -18,6 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/appbg"
+    android:scaleType="fitXY"
     android:id="@+id/image"/>
 
 
@@ -46,7 +47,9 @@
         android:layout_height="wrap_content"
         android:text="SpiderMan No way home asa as as asdad"
         android:maxLines="3"
+        android:textColor="@color/black"
         android:id="@+id/title"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
         app:layout_constraintTop_toBottomOf="@id/ImageCard"
         app:layout_constraintEnd_toEndOf="@id/ImageCard"
         app:layout_constraintStart_toStartOf="@id/ImageCard"
